@@ -18,7 +18,7 @@ jobs:
     - name: 安装依赖
       run: |
         pip install pyinstaller
-        pip install -r requirements.txt  # 如果有依赖库
+        pip install pandas  # 如果有依赖库
         
     - name: 打包应用
       run: pyinstaller --onefile --windowed --name shein工厂货款计算 shein工厂货款计算.py  # 修改为你的文件名
