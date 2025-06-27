@@ -1,0 +1,30 @@
+name: Build macOS App
+
+on: [push]  # 代码推送时自动运行
+
+jobs:
+  build:
+    runs-on: macos-latest  # 使用苹果系统虚拟机
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      
+    - name: 设置Python环境
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'  # 改成你的Python版本
+        
+    - name: 安装依赖
+      run: |
+        pip install pyinstaller
+        pip install -r requirements.txt  # 如果有依赖库
+        
+    - name: 打包应用
+      run: pyinstaller --onefile --windowed --name shein工厂货款计算 shein工厂货款计算.py  # 修改为你的文件名
+      
+    - name: 上传成品
+      uses: actions/upload-artifact@v3
+      with:
+        name: macos-app
+        path: dist/  # 打包生成的文件夹
